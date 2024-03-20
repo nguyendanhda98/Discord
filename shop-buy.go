@@ -31,9 +31,9 @@
 {{ $log_channel := $shop_log.Value.channel }}
 {{ $log_role := $shop_log.Value.role }}
 {{ $log_embed := cembed
-	"author" (sdict "name" .User.Username "icon_url" (.User.AvatarURL "512"))	
-	"description" (print "Mua vật phẩm: " $item_content " với giá " $item_price " :taco:")
-	"footer" (sdict "text" (print "ID: " .User.ID))
+	"author" (sdict "name" .User.Globalname "icon_url" (.User.AvatarURL "512"))	
+	"description" (print "Mua vật phẩm: **" $item_content "** với giá " $item_price " :taco:")
 	"timestamp" currentTime
 }}
-{{ sendMessage $log_channel.ID $log_embed }}
+
+{{ sendMessageNoEscape $log_channel.ID (complexMessage "content" (print "<@&" $log_role.ID ">") "embed" $log_embed) }}

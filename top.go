@@ -24,7 +24,6 @@
 	{{ end }}
 {{ end }}
 {{ $title := print "Top Taco Bank :taco:" }}
-
 {{ $serverIcon := (joinStr "" "https://cdn.discordapp.com/icons/" .Guild.ID "/" .Guild.Icon ".png") }}
 {{ $avatar := print "https://cdn.discordapp.com/avatars/" .User.ID "/" .User.Avatar ".png" }}
 

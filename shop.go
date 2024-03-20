@@ -8,7 +8,7 @@
 {{ $items_total := dbGetPattern $shop_ID "%" 100 0 }}
 {{ $items_length := len $items_total }}
 {{ $max_page := 1}}
-{{ if gt $items_length 5 }}
+{{ if gt $items_length $items_per_page }}
 {{ $max_page = roundCeil (fdiv $items_length $items_per_page) }}
 {{ end }}
 {{ if gt $shop_page (toInt $max_page) }}

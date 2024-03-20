@@ -8,7 +8,7 @@
 {{ $items_length := len $items_total }}
 {{ $max_page := 1}}
 {{ if gt $items_length 5 }}
-{{ $max_page := div $items_length 5 }}
+{{ $max_page = div $items_length 5 }}
 {{ end }}
 {{ $items := dbGetPattern $shop_ID "%" 5 ( mult (sub $shop_page 1) 5 )}}
 {{ $fields := cslice 
@@ -46,3 +46,4 @@
 }}
 
 {{ sendMessage nil $Msg }}
+

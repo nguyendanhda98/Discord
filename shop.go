@@ -1,5 +1,6 @@
 {{ $args := parseArgs 0 "<page>" (carg "int" "page of shop") }}
 {{ $shop_page := 1 }}
+{{ $items_per_page := 5 }}
 {{ if $args.IsSet 0 }}
 	{{ $shop_page = $args.Get 0 }}
 {{ end }}
@@ -8,9 +9,12 @@
 {{ $items_length := len $items_total }}
 {{ $max_page := 1}}
 {{ if gt $items_length 5 }}
-{{ $max_page = roundCeil (fdiv $items_length 5) }}
+{{ $max_page = roundCeil (fdiv $items_length $items_per_page) }}
 {{ end }}
-{{ $items := dbGetPattern $shop_ID "%" 5 ( mult (sub $shop_page 1) 5 )}}
+{{ if gt $shop_page (toInt $max_page) }}
+	{{ $shop_page = $max_page }}
+{{ end }}
+{{ $items := dbGetPattern $shop_ID "%" $items_per_page ( mult (sub $shop_page 1) $items_per_page )}}
 {{ $fields := cslice 
 	(sdict "name" "Cửa hàng trống" "value" "Cửa hàng hiện đang trống, hãy quay lại sau." "inline" false)
 }}

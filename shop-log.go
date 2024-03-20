@@ -5,4 +5,4 @@
 {{ end }}
 {{ $log_channel := $shop_log.Value.channel }}
 {{ $log_role := $shop_log.Value.role }}
-{{ sendMessage nil (print "Kênh: " $log_channel " - Vai trò: " $log_role " - Đã cài đặt để nhận shop log.") }}
+{{ sendMessageNoEscape nil (print "Kênh: <#" $log_channel.ID "> - Vai trò: <@&" $log_role.ID ">") }}

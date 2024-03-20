@@ -1,3 +1,9 @@
+{{ $shop_log := dbGet 0 "shop_log" }}
+{{ if not $shop_log }}
+	{{ sendMessage nil "Chưa cài đặt kênh và vai trò để nhận shop log. Hãy bảo admin cài đặt bằng lệnh ` taco shop-log-set`." }}
+	{{ return }}
+{{ end }}
+
 {{ $args := parseArgs 0 "<id>" (carg "int" "ID của vật phẩm") }}
 {{ $shop_ID := 1 }}
 {{ $item_ID := $args.Get 0 }}
@@ -21,11 +27,13 @@
 {{ dbSet .User.ID "taco_bank" (sub (toInt $user_taco_bank.Value) $item_price) }}
 {{ dbSet $shop_ID (joinStr "" $item_ID) (sdict "content" $item_content "price" $item_price "amount" (sub $item_amount 1)) }}
 {{ sendMessage nil (print "Bạn đã mua thành công vật phẩm: " $item_content " với giá " $item_price " :taco:") }}
-{{ $log_channel := 1218877357306155048 }}
+
+{{ $log_channel := $shop_log.Value.channel }}
+{{ $log_role := $shop_log.Value.role }}
 {{ $log_embed := cembed
-	"author" (sdict "name" .User.Username "icon_url" (.User.AvatarURL "512"))
+	"author" (sdict "name" .User.Username "icon_url" (.User.AvatarURL "512"))	
 	"description" (print "Mua vật phẩm: " $item_content " với giá " $item_price " :taco:")
 	"footer" (sdict "text" (print "ID: " .User.ID))
 	"timestamp" currentTime
 }}
-{{ sendMessage $log_channel $log_embed }}
+{{ sendMessage $log_channel.ID $log_embed }}

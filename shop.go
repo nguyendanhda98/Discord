@@ -27,7 +27,7 @@
 {{ end }}
 
 {{ $title := print "Shop Taco :taco:" }}
-{{ $MessageDiscription := "Để mua, hãy dùng lệnh `taco buy <id>`"}}
+{{ $MessageDiscription := "Để mua, hãy dùng lệnh `taco shop-buy <id>`"}}
 {{ $serverIcon := (joinStr "" "https://cdn.discordapp.com/icons/" .Guild.ID "/" .Guild.Icon ".png") }}
 {{ $avatar := print "https://cdn.discordapp.com/avatars/" .User.ID "/" .User.Avatar ".png" }}
  

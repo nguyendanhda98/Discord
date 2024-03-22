@@ -39,4 +39,4 @@ Bạn không đủ taco để tặng. Bạn có {{$taco_daily.Value}}/{{ $taco_l
  
 {{ dbSetExpire .User.ID "taco_daily" (sub $taco_daily.Value $amount) $timeUntilNextDay}}
 {{ $user_target_taco_bank := dbIncr $user_target.ID "taco_bank" $amount }}
-Bạn đã tặng thành công {{ $amount }} taco cho {{ $user_target.Mention }} với lời nhắn: {{ $message }}
+{{ .User.Mention }} đã tặng {{ $user_target.Mention }} **{{ $amount }}** :taco: với lời nhắn: {{ $message }}

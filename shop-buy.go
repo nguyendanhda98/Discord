@@ -32,7 +32,7 @@
 {{ $log_role := $shop_log.Value.role }}
 {{ $log_embed := cembed
 	"author" (sdict "name" .User.Globalname "icon_url" (.User.AvatarURL "512"))	
-	"description" (print "Mua vật phẩm: **" $item_content "** với giá " $item_price " :taco:")
+	"description" (print .User.Mention " đã mua **" $item_content "** với giá **" $item_price "** :taco:")
 	"timestamp" currentTime
 }}
 

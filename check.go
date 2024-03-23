@@ -8,6 +8,11 @@
 {{ $currentTime := currentTime.Add 25200000000000 }}
 {{ $timeUntilNextDay := sub 86400 (mod $currentTime.Unix 86400) }}
 {{ $taco_limit := (dbGet 0 "taco_limit") }}
+
+{{ $taco_user_limit := (dbGet $user_target.ID "taco_limit" ) }}
+{{ if $taco_user_limit}}
+{{ $taco_limit = $taco_user_limit }}
+{{ end }}
  
 {{ if not $taco_daily }}
 {{ $taco_daily_value = $taco_limit.Value }}

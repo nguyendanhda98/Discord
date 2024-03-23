@@ -21,7 +21,7 @@ Số lượng taco phải lớn hơn 0.
 {{ $taco_daily := (dbGet .User.ID "taco_daily") }}
 {{ $taco_limit := (dbGet 0 "taco_limit") }}
  
-{{ $taco_user_limit := (dbGet .User.ID "taco_limit" ) }}
+{{ $taco_user_limit := (dbGet $user_target.ID "taco_limit" ) }}
 {{ if $taco_user_limit}}
 {{ $taco_limit = $taco_user_limit }}
 {{ end }}
